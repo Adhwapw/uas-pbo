@@ -65,7 +65,6 @@ public class Menu extends javax.swing.JFrame {
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(677, 500));
 
         dekstopPane.setPreferredSize(new java.awt.Dimension(677, 500));
         dekstopPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +115,7 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane4.setPreferredSize(new java.awt.Dimension(223, 62));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foto/LightStick.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/LightStick.png"))); // NOI18N
         jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel10.setVerifyInputWhenFocusTarget(false);
         jLabel10.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -159,7 +158,7 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foto/DreamScape.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/DreamScape.png"))); // NOI18N
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel4.setVerifyInputWhenFocusTarget(false);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -203,7 +202,7 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane5.setPreferredSize(new java.awt.Dimension(223, 62));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foto/Reload.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/Reload.png"))); // NOI18N
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel13.setVerifyInputWhenFocusTarget(false);
         jLabel13.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -246,7 +245,7 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foto/Candy.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/Candy.png"))); // NOI18N
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel2.setVerifyInputWhenFocusTarget(false);
         jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -289,7 +288,7 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foto/HotSauce.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/HotSauce.png"))); // NOI18N
         jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel8.setVerifyInputWhenFocusTarget(false);
         jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -314,7 +313,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(jLabel9))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
