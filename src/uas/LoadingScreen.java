@@ -4,6 +4,8 @@
  */
 package uas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -31,7 +33,7 @@ public class LoadingScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        dekstopPane = new javax.swing.JPanel();
         LoadingBar = new javax.swing.JProgressBar();
         LoadingLabel = new javax.swing.JLabel();
         LoadingValue = new javax.swing.JLabel();
@@ -39,50 +41,49 @@ public class LoadingScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 153));
+        dekstopPane.setBackground(new java.awt.Color(255, 204, 204));
+        dekstopPane.setPreferredSize(new java.awt.Dimension(677, 500));
 
-        LoadingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LoadingLabel.setBackground(new java.awt.Color(0, 0, 0));
         LoadingLabel.setText("LOADING....");
 
-        LoadingValue.setForeground(new java.awt.Color(255, 255, 255));
         LoadingValue.setText("0 %");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LoadingBar, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout dekstopPaneLayout = new javax.swing.GroupLayout(dekstopPane);
+        dekstopPane.setLayout(dekstopPaneLayout);
+        dekstopPaneLayout.setHorizontalGroup(
+            dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dekstopPaneLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(LoadingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LoadingValue)
-                .addGap(20, 20, 20))
+                .addGap(561, 561, 561)
+                .addComponent(LoadingValue))
+            .addGroup(dekstopPaneLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(LoadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(515, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        dekstopPaneLayout.setVerticalGroup(
+            dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dekstopPaneLayout.createSequentialGroup()
+                .addGap(452, 452, 452)
+                .addGroup(dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LoadingLabel)
                     .addComponent(LoadingValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LoadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(LoadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dekstopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dekstopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -117,6 +118,10 @@ public class LoadingScreen extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         LoadingScreen ls = new LoadingScreen();
         ls.setVisible(true);
@@ -144,8 +149,8 @@ public class LoadingScreen extends javax.swing.JFrame {
                ls.LoadingLabel.setText("Starting Application, Please Wait!");
               }
               if (i == 100){
-              Kalkulator klk = new Kalkulator();
-              klk.setVisible(true);
+              Login login = new Login();
+              login.setVisible(true);
               ls.setVisible(false);
               }
               ls.LoadingBar.setValue(i);}
@@ -158,6 +163,6 @@ public class LoadingScreen extends javax.swing.JFrame {
     private javax.swing.JProgressBar LoadingBar;
     private javax.swing.JLabel LoadingLabel;
     private javax.swing.JLabel LoadingValue;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel dekstopPane;
     // End of variables declaration//GEN-END:variables
 }
