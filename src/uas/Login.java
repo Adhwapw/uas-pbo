@@ -5,6 +5,11 @@
 package uas;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -19,6 +24,20 @@ public class Login extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
+    }
+
+    private void openAdminPanel() {
+        // Logika untuk membuka panel admin
+        menuadmin.tampilan.admin adminPanel = new menuadmin.tampilan.admin();
+        adminPanel.setVisible(true);
+        this.dispose(); // Tutup form login
+    }
+
+    private void openCustomerDashboard() {
+        // Logika untuk membuka dashboard customer
+        Menu customerDashboard = new Menu();
+        customerDashboard.setVisible(true);
+        this.dispose(); // Tutup form login
     }
 
     /**
@@ -104,6 +123,11 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setText("Belum mempunyai akun?");
 
         masukbt.setText("Masuk");
+        masukbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                masukbtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -186,6 +210,48 @@ public class Login extends javax.swing.JFrame {
         login.setVisible(false);
     }//GEN-LAST:event_daftarbtActionPerformed
 
+    private void masukbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masukbtActionPerformed
+        String usernamee = username.getText();
+        String password = new String(sandi.getPassword());
+
+        if (usernamee.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username dan Password tidak boleh kosong!");
+            return;
+        }
+
+        try {
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi 
+            Connection conn = db.connect();
+
+            // Query untuk memeriksa username dan password
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, usernamee);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Ambil data role dari hasil query
+                String role = rs.getString("role");
+
+                // Tampilkan pesan dan arahkan berdasarkan role
+                JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + role);
+
+                if (role.equals("admin")) {
+                    openAdminPanel(); // Buka form atau panel untuk admin
+                } else if (role.equals("customer")) {
+                    openCustomerDashboard(); // Buka form atau panel untuk customer
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Username atau Password salah!");
+            }
+
+            conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan koneksi database: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_masukbtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -219,7 +285,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
