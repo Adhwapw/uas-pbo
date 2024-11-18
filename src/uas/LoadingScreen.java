@@ -118,10 +118,6 @@ public class LoadingScreen extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         LoadingScreen ls = new LoadingScreen();
         ls.setVisible(true);

@@ -65,6 +65,7 @@ public class Menu extends javax.swing.JFrame {
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(677, 500));
 
         dekstopPane.setPreferredSize(new java.awt.Dimension(677, 500));
         dekstopPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -484,14 +485,6 @@ public class Menu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
