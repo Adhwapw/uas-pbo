@@ -60,6 +60,8 @@ public class admin extends javax.swing.JFrame {
         kGradientPanel1.setkGradientFocus(900);
         kGradientPanel1.setkStartColor(new java.awt.Color(255, 227, 225));
 
+        kGradientPanel2.setkEndColor(new java.awt.Color(204, 204, 255));
+        kGradientPanel2.setkStartColor(new java.awt.Color(255, 204, 204));
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btndataadmin.setBackground(new java.awt.Color(255, 148, 148));
@@ -69,16 +71,16 @@ public class admin extends javax.swing.JFrame {
                 btndataadminActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(btndataadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, -1));
+        kGradientPanel2.add(btndataadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
-        rSButtonIconD2.setBackground(new java.awt.Color(255, 148, 148));
-        rSButtonIconD2.setText("Admin");
+        rSButtonIconD2.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD2.setText("Data Produk");
         rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonIconD2ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, -1));
+        kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, -1));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
