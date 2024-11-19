@@ -37,41 +37,25 @@ public class LoadingScreen extends javax.swing.JFrame {
         LoadingBar = new javax.swing.JProgressBar();
         LoadingLabel = new javax.swing.JLabel();
         LoadingValue = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         dekstopPane.setBackground(new java.awt.Color(255, 204, 204));
         dekstopPane.setPreferredSize(new java.awt.Dimension(677, 500));
+        dekstopPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dekstopPane.add(LoadingBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 558, 665, 20));
 
         LoadingLabel.setBackground(new java.awt.Color(0, 0, 0));
         LoadingLabel.setText("LOADING....");
+        dekstopPane.add(LoadingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 536, -1, -1));
 
         LoadingValue.setText("0 %");
+        dekstopPane.add(LoadingValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(637, 536, -1, -1));
 
-        javax.swing.GroupLayout dekstopPaneLayout = new javax.swing.GroupLayout(dekstopPane);
-        dekstopPane.setLayout(dekstopPaneLayout);
-        dekstopPaneLayout.setHorizontalGroup(
-            dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dekstopPaneLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(LoadingLabel)
-                .addGap(561, 561, 561)
-                .addComponent(LoadingValue))
-            .addGroup(dekstopPaneLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(LoadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        dekstopPaneLayout.setVerticalGroup(
-            dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dekstopPaneLayout.createSequentialGroup()
-                .addGap(452, 452, 452)
-                .addGroup(dekstopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LoadingLabel)
-                    .addComponent(LoadingValue))
-                .addGap(6, 6, 6)
-                .addComponent(LoadingBar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/Untitled design (17).png"))); // NOI18N
+        dekstopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +67,7 @@ public class LoadingScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dekstopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dekstopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,5 +144,6 @@ public class LoadingScreen extends javax.swing.JFrame {
     private javax.swing.JLabel LoadingLabel;
     private javax.swing.JLabel LoadingValue;
     private javax.swing.JPanel dekstopPane;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
