@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="efectos.MaterialColor" name="materialColor1">
     </Component>
@@ -176,8 +176,9 @@
                               <Component id="search" min="-2" pref="159" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rSMaterialButtonRectangle1" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="305" max="32767" attributes="0"/>
+                      <EmptySpace pref="299" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -209,6 +210,8 @@
                                   <Component id="btneeditproduk" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btntambahproduk" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="rSMaterialButtonRectangle1" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -347,6 +350,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntambahprodukActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Hapus"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

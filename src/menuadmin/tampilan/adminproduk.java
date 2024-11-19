@@ -29,7 +29,7 @@ public class adminproduk extends javax.swing.JFrame {
         txtharga.setText("");
         txtstok.setText("");
     }
-    
+
     private void loadTable() {
         try {
             // Hubungkan ke database
@@ -71,7 +71,7 @@ public class adminproduk extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal menampilkan data: " + ex.getMessage());
         }
     }
-    
+
     private void tampilkanDataKeField(int selectedRow) {
         try {
             // Ambil data dari JTable berdasarkan baris yang dipilih
@@ -92,7 +92,7 @@ public class adminproduk extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal menampilkan data ke field: " + ex.getMessage());
         }
     }
-    
+
     private void searchTable(String keyword) {
         try {
             // Hubungkan ke database
@@ -136,6 +136,7 @@ public class adminproduk extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal mencari data: " + ex.getMessage());
         }
     }
+
     /**
      * Creates new form admin
      */
@@ -151,8 +152,6 @@ public class adminproduk extends javax.swing.JFrame {
             }
         });
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,6 +182,7 @@ public class adminproduk extends javax.swing.JFrame {
         btnhapusproduk = new javax.swing.JButton();
         btneeditproduk = new javax.swing.JButton();
         btntambahproduk = new javax.swing.JButton();
+        rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -285,6 +285,13 @@ public class adminproduk extends javax.swing.JFrame {
             }
         });
 
+        rSMaterialButtonRectangle1.setText("Hapus");
+        rSMaterialButtonRectangle1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -312,8 +319,9 @@ public class adminproduk extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btntambahproduk)))
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
-                .addContainerGap(305, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +349,9 @@ public class adminproduk extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnhapusproduk)
                             .addComponent(btneeditproduk)
-                            .addComponent(btntambahproduk))))
+                            .addComponent(btntambahproduk))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -375,9 +385,9 @@ public class adminproduk extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndataadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndataadminActionPerformed
-    datauser u = new datauser();
+        datauser u = new datauser();
         u.setVisible(true);
-        this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_btndataadminActionPerformed
 
     private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
@@ -430,7 +440,7 @@ public class adminproduk extends javax.swing.JFrame {
     private void btneeditprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneeditprodukActionPerformed
         // Validasi input agar tidak ada field kosong
         if (txtnama.getText().isEmpty() || txtkategori.getText().isEmpty() || txtharga.getText().isEmpty()
-            || txtstok.getText().isEmpty() || txtdeskripsi.getText().isEmpty()) {
+                || txtstok.getText().isEmpty() || txtdeskripsi.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -512,6 +522,36 @@ public class adminproduk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btntambahprodukActionPerformed
 
+    private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
+        int selectedRow = tabelproduk.getSelectedRow();
+        if (selectedRow != -1) {
+            String idProduct = tabelproduk.getValueAt(selectedRow, 0).toString();
+
+            int confirm = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus produk ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    Koneksi db = new Koneksi();
+                    Connection conn = db.connect();
+
+                    // Query delete data
+                    String sql = "DELETE FROM products WHERE id_product = ?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, idProduct);
+
+                    stmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Data produk berhasil dihapus!");
+                    loadTable(); // Refresh tabel
+                    clearForm(); // Kosongkan form
+                    conn.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + ex.getMessage());
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus!");
+        }
+    }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -562,6 +602,7 @@ public class adminproduk extends javax.swing.JFrame {
     private efectos.MaterialColor materialColor1;
     private javax.swing.JPanel pnback;
     private rojerusan.RSButtonIconD rSButtonIconD2;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private javax.swing.JTextField search;
     private javax.swing.JTable tabelproduk;
     private javax.swing.JTextField txtdeskripsi;
