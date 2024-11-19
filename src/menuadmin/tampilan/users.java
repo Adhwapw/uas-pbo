@@ -105,7 +105,7 @@ public class users extends javax.swing.JPanel {
 
         btnsimpanuser.setBackground(new java.awt.Color(255, 153, 153));
         btnsimpanuser.setForeground(new java.awt.Color(0, 0, 0));
-        btnsimpanuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-save-25.png"))); // NOI18N
+        btnsimpanuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-save-30.png"))); // NOI18N
         btnsimpanuser.setText("Simpan");
         btnsimpanuser.setColorHover(new java.awt.Color(255, 204, 204));
         btnsimpanuser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
