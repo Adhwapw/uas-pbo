@@ -5,7 +5,15 @@
 package produk;
 
 import javax.swing.JFrame;
-import uas.Register;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import uas.Koneksi;
+import uas.UserSession;
 
 /**
  *
@@ -16,10 +24,50 @@ public class Candydesc extends javax.swing.JFrame {
     /**
      * Creates new form Login1
      */
+    
+
     public Candydesc() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
+    }
+
+    private String generateOrderId() {
+        String newOrderId = "ORD001"; // Default jika tidak ada order di database
+        String lastOrderId = null;
+
+        try {
+            // Koneksi ke database
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
+            Connection conn = db.connect();
+            // Query untuk mengambil ID order terakhir (order by descending)
+            String sql = "SELECT id_order FROM orders ORDER BY id_order DESC LIMIT 1";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                // Ambil ID order terakhir
+                lastOrderId = rs.getString("id_order");
+            }
+
+            if (lastOrderId != null && lastOrderId.startsWith("ORD")) {
+                // Ambil angka setelah "ORD"
+                int lastNumber = Integer.parseInt(lastOrderId.substring(3));
+                // Tambahkan 1 pada angka terakhir
+                int newNumber = lastNumber + 1;
+                // Format angka menjadi 3 digit
+                newOrderId = String.format("ORD%03d", newNumber);
+            }
+
+            // Tutup koneksi
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error saat generate ID Order: " + e.getMessage());
+        }
+
+        return newOrderId;
     }
 
     /**
@@ -56,17 +104,18 @@ public class Candydesc extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtnamapen = new javax.swing.JTextField();
+        txtnoTlp = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
+        cmbxKurir = new javax.swing.JComboBox<>();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtjumlah = new javax.swing.JTextField();
+        txtcatatan = new javax.swing.JTextField();
+        cmbxmetbay = new javax.swing.JComboBox<>();
+        btnpesan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,7 +249,7 @@ public class Candydesc extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,13 +284,13 @@ public class Candydesc extends javax.swing.JFrame {
         jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel28.setText("Kurir");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtnamapen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtnamapenActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JNT", "JNE", "Sicepat" }));
+        cmbxKurir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih", "JNT", "JNE", "Sicepat" }));
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -253,11 +302,11 @@ public class Candydesc extends javax.swing.JFrame {
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(txtnamapen))
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel26)
                         .addGap(62, 62, 62)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                        .addComponent(txtnoTlp, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -268,9 +317,9 @@ public class Candydesc extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbxKurir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))))
+                            .addComponent(txtAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         kGradientPanel2Layout.setVerticalGroup(
@@ -281,20 +330,20 @@ public class Candydesc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnamapen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtnoTlp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(cmbxKurir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         kGradientPanel1.setkEndColor(new java.awt.Color(204, 204, 255));
@@ -309,15 +358,22 @@ public class Candydesc extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel31.setText("Catatan");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtjumlah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtjumlahActionPerformed(evt);
             }
         });
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtcatatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtcatatanActionPerformed(evt);
+            }
+        });
+
+        cmbxmetbay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Metode Bayar", "Bank", "E-wallet" }));
+        cmbxmetbay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbxmetbayActionPerformed(evt);
             }
         });
 
@@ -330,15 +386,18 @@ public class Candydesc extends javax.swing.JFrame {
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 155, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
                             .addComponent(jLabel31))
                         .addGap(18, 18, 18)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField4))))
+                            .addComponent(txtcatatan)
+                            .addComponent(txtjumlah)
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(cmbxmetbay, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -349,23 +408,31 @@ public class Candydesc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtjumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel31)
-                        .addGap(0, 60, Short.MAX_VALUE))
-                    .addComponent(jTextField5))
-                .addContainerGap())
+                    .addComponent(jLabel31)
+                    .addComponent(txtcatatan, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(cmbxmetbay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Pesan");
+        btnpesan.setText("Pesan");
+        btnpesan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnpesan)
+                .addGap(14, 14, 14))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,12 +440,11 @@ public class Candydesc extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(14, 14, 14))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,16 +452,17 @@ public class Candydesc extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnpesan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        dekstopPane.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, -1, -1));
+        dekstopPane.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, -1, 440));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -420,17 +487,83 @@ public class Candydesc extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtnamapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamapenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtnamapenActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtjumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtjumlahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtjumlahActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtcatatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcatatanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtcatatanActionPerformed
+
+    private void cmbxmetbayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxmetbayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbxmetbayActionPerformed
+
+    private void btnpesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesanActionPerformed
+        String namaPenerima = txtnamapen.getText();
+        String noTelepon = txtnoTlp.getText();
+        String alamat = txtAlamat.getText();
+        String kurir = (String) cmbxKurir.getSelectedItem();
+        int jumlah = Integer.parseInt(txtjumlah.getText());
+        String catatan = txtcatatan.getText();
+        String metodeBayar = (String) cmbxmetbay.getSelectedItem();
+
+        // Ambil informasi user yang login dari UserSession
+        UserSession session = UserSession.getInstance();
+        String idUser = session.getIdUser();
+
+        // Ambil informasi produk (dari sesi atau dari elemen GUI lain)
+        String idProduk = "P20112024"; 
+        double hargaProduk = 400000.0; 
+        double subtotal = hargaProduk * jumlah;
+
+        // Tanggal order saat ini
+        LocalDateTime tanggalOrder = LocalDateTime.now();
+        DateTimeFormatter formatTanggal = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String tanggalOrderFormatted = tanggalOrder.format(formatTanggal);
+
+        // Insert data ke tabel 'orders'
+        String sql = "INSERT INTO orders (id_order, id_user, order_date, subtotal, payment_status, status, quantity, metode_bayar, id_product) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            // Koneksi ke database
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
+            Connection conn = db.connect();
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            // Generate ID order (kamu bisa menggunakan library UUID untuk ID unik)
+            String idOrder = generateOrderId();// Sebagai contoh ID unik
+
+            // Set parameter ke dalam PreparedStatement
+            pst.setString(1, idOrder);                // id_order
+            pst.setString(2, idUser);                 // id_user
+            pst.setString(3, tanggalOrderFormatted);  // order_date
+            pst.setDouble(4, subtotal);               // subtotal
+            pst.setString(5, "pending");              // payment_status (default: pending)
+            pst.setString(6, "pending");              // status (default: pending)
+            pst.setInt(7, jumlah);                    // quantity
+            pst.setString(8, metodeBayar);            // metode_bayar
+            pst.setString(9, idProduk);               // id_product
+
+            // Eksekusi query
+            pst.executeUpdate();
+
+            // Pesan sukses
+            JOptionPane.showMessageDialog(null, "Pesanan berhasil dibuat!");
+
+            // Tutup koneksi
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            // Pesan jika ada kesalahan
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menyimpan data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnpesanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,10 +632,11 @@ public class Candydesc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnpesan;
+    private javax.swing.JComboBox<String> cmbxKurir;
+    private javax.swing.JComboBox<String> cmbxmetbay;
     private javax.swing.JPanel dekstopPane;
     private javax.swing.JLabel exit;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -525,15 +659,15 @@ public class Candydesc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
+    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtcatatan;
+    private javax.swing.JTextField txtjumlah;
+    private javax.swing.JTextField txtnamapen;
+    private javax.swing.JTextField txtnoTlp;
     // End of variables declaration//GEN-END:variables
 }

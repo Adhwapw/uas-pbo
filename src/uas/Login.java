@@ -17,9 +17,9 @@ import java.sql.SQLException;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login1
-     */
+    private String idUserLogin; // Untuk menyimpan ID user
+    private String userRole; // Untuk menyimpan role user
+
     public Login() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
@@ -34,11 +34,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void openCustomerDashboard() {
-        // Logika untuk membuka dashboard customer
+        // Pindah ke panel dashboard customer
         Menu customerDashboard = new Menu();
         customerDashboard.setVisible(true);
         this.dispose(); // Tutup form login
     }
+    // Logika untuk membuka dashboard customer
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,7 +221,7 @@ public class Login extends javax.swing.JFrame {
         }
 
         try {
-            Koneksi db = new Koneksi(); // Menggunakan class koneksi 
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
             Connection conn = db.connect();
 
             // Query untuk memeriksa username dan password
@@ -231,15 +232,17 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Ambil data role dari hasil query
-                String role = rs.getString("role");
+                // Ambil data role dan id_user dari hasil query
+                UserSession.getInstance().setUser(rs.getString("id_user"), rs.getString("username"), rs.getString("alamat"), rs.getString("nomor_telepon"));
+                idUserLogin = rs.getString("id_user");
+                userRole = rs.getString("role");
 
                 // Tampilkan pesan dan arahkan berdasarkan role
-                JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + role);
+                JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + userRole);
 
-                if (role.equals("admin")) {
+                if (userRole.equals("admin")) {
                     openAdminPanel(); // Buka form atau panel untuk admin
-                } else if (role.equals("customer")) {
+                } else if (userRole.equals("customer")) {
                     openCustomerDashboard(); // Buka form atau panel untuk customer
                 }
             } else {

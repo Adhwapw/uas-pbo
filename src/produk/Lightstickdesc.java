@@ -5,7 +5,15 @@
 package produk;
 
 import javax.swing.JFrame;
-import uas.Register;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import uas.Koneksi;
+import uas.UserSession;
 
 /**
  *
@@ -20,6 +28,44 @@ public class Lightstickdesc extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
+    }
+
+    private String generateOrderId() {
+        String newOrderId = "ORD001"; // Default jika tidak ada order di database
+        String lastOrderId = null;
+
+        try {
+            // Koneksi ke database
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
+            Connection conn = db.connect();
+            // Query untuk mengambil ID order terakhir (order by descending)
+            String sql = "SELECT id_order FROM orders ORDER BY id_order DESC LIMIT 1";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                // Ambil ID order terakhir
+                lastOrderId = rs.getString("id_order");
+            }
+
+            if (lastOrderId != null && lastOrderId.startsWith("ORD")) {
+                // Ambil angka setelah "ORD"
+                int lastNumber = Integer.parseInt(lastOrderId.substring(3));
+                // Tambahkan 1 pada angka terakhir
+                int newNumber = lastNumber + 1;
+                // Format angka menjadi 3 digit
+                newOrderId = String.format("ORD%03d", newNumber);
+            }
+
+            // Tutup koneksi
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error saat generate ID Order: " + e.getMessage());
+        }
+
+        return newOrderId;
     }
 
     /**
@@ -55,16 +101,17 @@ public class Lightstickdesc extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tnama = new javax.swing.JTextField();
+        tTelepon = new javax.swing.JTextField();
+        tAlamat = new javax.swing.JTextField();
+        cmbKurir = new javax.swing.JComboBox<>();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        tjumlah = new javax.swing.JTextField();
+        tcatatan = new javax.swing.JTextField();
+        cmbmetode = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -230,13 +277,13 @@ public class Lightstickdesc extends javax.swing.JFrame {
         jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel28.setText("Kurir");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tnama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tnamaActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JNT", "JNE", "Sicepat" }));
+        cmbKurir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kurir", "JNT", "JNE", "Sicepat" }));
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -248,11 +295,11 @@ public class Lightstickdesc extends javax.swing.JFrame {
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(tnama))
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel26)
                         .addGap(62, 62, 62)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                        .addComponent(tTelepon, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -263,9 +310,9 @@ public class Lightstickdesc extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbKurir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))))
+                            .addComponent(tAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         kGradientPanel2Layout.setVerticalGroup(
@@ -276,19 +323,19 @@ public class Lightstickdesc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbKurir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -304,19 +351,19 @@ public class Lightstickdesc extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel31.setText("Catatan");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tjumlah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tjumlahActionPerformed(evt);
             }
         });
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        tcatatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                tcatatanActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Pesan");
+        cmbmetode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Bayar", "Bank", "E-wallet" }));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -327,18 +374,18 @@ public class Lightstickdesc extends javax.swing.JFrame {
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 155, Short.MAX_VALUE))
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
                             .addComponent(jLabel31))
                         .addGap(18, 18, 18)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                .addComponent(cmbmetode, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(tcatatan)
+                            .addComponent(tjumlah))))
                 .addContainerGap())
         );
         kGradientPanel1Layout.setVerticalGroup(
@@ -349,17 +396,22 @@ public class Lightstickdesc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tjumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel31)
-                        .addGap(0, 60, Short.MAX_VALUE))
-                    .addComponent(jTextField5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                    .addComponent(jLabel31)
+                    .addComponent(tcatatan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(cmbmetode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
+
+        jButton1.setText("Pesan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -373,7 +425,11 @@ public class Lightstickdesc extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(11, 11, 11)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -385,7 +441,9 @@ public class Lightstickdesc extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -414,17 +472,79 @@ public class Lightstickdesc extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tnamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tnamaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tnamaActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tjumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tjumlahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tjumlahActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void tcatatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcatatanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_tcatatanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String namaPenerima = tnama.getText();
+        String noTelepon = tTelepon.getText();
+        String alamat = tAlamat.getText();
+        String kurir = (String) cmbKurir.getSelectedItem();
+        int jumlah = Integer.parseInt(tjumlah.getText());
+        String catatan = tcatatan.getText();
+        String metodeBayar = (String) cmbmetode.getSelectedItem();
+
+        // Ambil informasi user yang login dari UserSession
+        UserSession session = UserSession.getInstance();
+        String idUser = session.getIdUser();
+
+        // Ambil informasi produk (dari sesi atau dari elemen GUI lain)
+        String idProduk = "P20112027";
+        double hargaProduk = 230000.0;
+        double subtotal = hargaProduk * jumlah;
+
+        // Tanggal order saat ini
+        LocalDateTime tanggalOrder = LocalDateTime.now();
+        DateTimeFormatter formatTanggal = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String tanggalOrderFormatted = tanggalOrder.format(formatTanggal);
+
+        // Insert data ke tabel 'orders'
+        String sql = "INSERT INTO orders (id_order, id_user, order_date, subtotal, payment_status, status, quantity, metode_bayar, id_product) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            // Koneksi ke database
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
+            Connection conn = db.connect();
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            // Generate ID order (kamu bisa menggunakan library UUID untuk ID unik)
+            String idOrder = generateOrderId();// Sebagai contoh ID unik
+
+            // Set parameter ke dalam PreparedStatement
+            pst.setString(1, idOrder);                // id_order
+            pst.setString(2, idUser);                 // id_user
+            pst.setString(3, tanggalOrderFormatted);  // order_date
+            pst.setDouble(4, subtotal);               // subtotal
+            pst.setString(5, "pending");              // payment_status (default: pending)
+            pst.setString(6, "pending");              // status (default: pending)
+            pst.setInt(7, jumlah);                    // quantity
+            pst.setString(8, metodeBayar);            // metode_bayar
+            pst.setString(9, idProduk);               // id_product
+
+            // Eksekusi query
+            pst.executeUpdate();
+
+            // Pesan sukses
+            JOptionPane.showMessageDialog(null, "Pesanan berhasil dibuat!");
+
+            // Tutup koneksi
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            // Pesan jika ada kesalahan
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menyimpan data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -717,10 +837,11 @@ public class Lightstickdesc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbKurir;
+    private javax.swing.JComboBox<String> cmbmetode;
     private javax.swing.JPanel dekstopPane;
     private javax.swing.JLabel exit;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -742,15 +863,15 @@ public class Lightstickdesc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
+    private javax.swing.JTextField tAlamat;
+    private javax.swing.JTextField tTelepon;
+    private javax.swing.JTextField tcatatan;
+    private javax.swing.JTextField tjumlah;
+    private javax.swing.JTextField tnama;
     // End of variables declaration//GEN-END:variables
 }

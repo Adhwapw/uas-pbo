@@ -120,7 +120,9 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btndataadminActionPerformed
 
     private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
-        // TODO add your handling code here:
+    dataproduk p = new dataproduk();
+        p.setVisible(true);
+        this.dispose(); 
     }//GEN-LAST:event_rSButtonIconD2ActionPerformed
 
     /**

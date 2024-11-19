@@ -12,6 +12,17 @@ import produk.Reloaddesc;
 import produk.Dreamscapedesc;
 import produk.Lightstickdesc;
 import produk.Hotsaucedesc;
+import javax.swing.JFrame;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import uas.Koneksi;
+import uas.UserSession;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +37,49 @@ public class transaksi extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
+        loadRiwayatTransaksi();
+    }
+
+    public void loadRiwayatTransaksi() {
+        UserSession userSession = UserSession.getInstance();
+        String idUserLogin = userSession.getIdUser(); // Dapatkan id_user dari sesi
+
+        DefaultTableModel model = (DefaultTableModel) tabelriwayat.getModel();
+        model.setRowCount(0); // Kosongkan tabel sebelum mengisi ulang data
+
+        try {
+            // Koneksi ke database
+            Koneksi db = new Koneksi(); // Menggunakan class koneksi
+            Connection conn = db.connect();// Query untuk mendapatkan riwayat transaksi user yang sedang login
+            String sql = "SELECT p.nama AS nama_produk, u.username AS nama_user, o.quantity AS jumlah, o.subtotal AS total_harga, o.status AS status_pesanan "
+                    + "FROM orders o "
+                    + "JOIN users u ON o.id_user = u.id_user "
+                    + "JOIN products p ON o.id_product = p.id_product "
+                    + "WHERE o.id_user = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, idUserLogin);
+
+            // Eksekusi query dan proses hasilnya
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                // Ambil data dari setiap baris hasil query
+                String namaProduk = rs.getString("nama_produk");
+                String namaUser = rs.getString("nama_user");
+                int jumlah = rs.getInt("jumlah");
+                double totalHarga = rs.getDouble("total_harga");
+                String statusPesanan = rs.getString("status_pesanan");
+
+                // Tambahkan data ke tabel di GUI
+                model.addRow(new Object[]{namaProduk, namaUser, jumlah, totalHarga, statusPesanan});
+            }
+
+            // Tutup koneksi
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("Error saat memuat riwayat transaksi: " + e.getMessage());
+        }
     }
 
     /**
@@ -47,7 +101,7 @@ public class transaksi extends javax.swing.JFrame {
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelriwayat = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,8 +180,8 @@ public class transaksi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelriwayat.setBackground(new java.awt.Color(204, 204, 255));
+        tabelriwayat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -135,10 +189,10 @@ public class transaksi extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nama Produk", "Nama Penerima", "Jumlah", "Total Harga", "Status"
+                "Nama Produk", "Nama User", "Jumlah", "Total Harga", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelriwayat);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -148,11 +202,11 @@ public class transaksi extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -249,9 +303,9 @@ public class transaksi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
+    private javax.swing.JTable tabelriwayat;
     // End of variables declaration//GEN-END:variables
 }
