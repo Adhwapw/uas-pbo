@@ -45,7 +45,8 @@ public class admin extends javax.swing.JFrame {
         pnback = new javax.swing.JPanel();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
         kGradientPanel2 = new com.k33ptoo.components.KGradientPanel();
-        rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        btndataadmin = new rojerusan.RSButtonIconD();
+        rSButtonIconD2 = new rojerusan.RSButtonIconD();
         mainpanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,14 +62,23 @@ public class admin extends javax.swing.JFrame {
 
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rSButtonIconD1.setBackground(new java.awt.Color(255, 148, 148));
-        rSButtonIconD1.setText("Admin");
-        rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
+        btndataadmin.setBackground(new java.awt.Color(255, 148, 148));
+        btndataadmin.setText("Admin");
+        btndataadmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonIconD1ActionPerformed(evt);
+                btndataadminActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(rSButtonIconD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, -1));
+        kGradientPanel2.add(btndataadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, -1));
+
+        rSButtonIconD2.setBackground(new java.awt.Color(255, 148, 148));
+        rSButtonIconD2.setText("Admin");
+        rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD2ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 150, -1));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
@@ -101,9 +111,15 @@ public class admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
+    private void btndataadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndataadminActionPerformed
+    datauser u = new datauser();
+        u.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_btndataadminActionPerformed
+
+    private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rSButtonIconD1ActionPerformed
+    }//GEN-LAST:event_rSButtonIconD2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,11 +157,12 @@ public class admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSButtonIconD btndataadmin;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
     private javax.swing.JPanel mainpanel;
     private efectos.MaterialColor materialColor1;
     private javax.swing.JPanel pnback;
-    private rojerusan.RSButtonIconD rSButtonIconD1;
+    private rojerusan.RSButtonIconD rSButtonIconD2;
     // End of variables declaration//GEN-END:variables
 }
