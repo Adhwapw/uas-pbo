@@ -4,18 +4,33 @@
  */
 package menuadmin.tampilan;
 
+import static uas.Register.main;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+import uas.Koneksi;
+
 /**
  *
  * @author adhwa
  */
 public class admin extends javax.swing.JFrame {
 
+    users u = new users();
+
     /**
      * Creates new form admin
      */
     public admin() {
         initComponents();
+
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,18 +43,67 @@ public class admin extends javax.swing.JFrame {
 
         materialColor1 = new efectos.MaterialColor();
         pnback = new javax.swing.JPanel();
+        kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
+        kGradientPanel2 = new com.k33ptoo.components.KGradientPanel();
+        rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        mainpanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1366, 768));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         setResizable(false);
-        setSize(new java.awt.Dimension(1366, 768));
+        setSize(new java.awt.Dimension(600, 500));
 
         pnback.setBackground(new java.awt.Color(255, 255, 255));
-        pnback.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(pnback, java.awt.BorderLayout.CENTER);
+
+        kGradientPanel1.setkEndColor(new java.awt.Color(255, 245, 228));
+        kGradientPanel1.setkGradientFocus(900);
+        kGradientPanel1.setkStartColor(new java.awt.Color(255, 227, 225));
+
+        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        rSButtonIconD1.setBackground(new java.awt.Color(255, 148, 148));
+        rSButtonIconD1.setText("Admin");
+        rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD1ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, -1));
+
+        mainpanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout pnbackLayout = new javax.swing.GroupLayout(pnback);
+        pnback.setLayout(pnbackLayout);
+        pnbackLayout.setHorizontalGroup(
+            pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnbackLayout.createSequentialGroup()
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
+            .addGroup(pnbackLayout.createSequentialGroup()
+                .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnbackLayout.setVerticalGroup(
+            pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnbackLayout.createSequentialGroup()
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                    .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
+        );
+
+        getContentPane().add(pnback, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonIconD1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +141,11 @@ public class admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.k33ptoo.components.KGradientPanel kGradientPanel1;
+    private com.k33ptoo.components.KGradientPanel kGradientPanel2;
+    private javax.swing.JPanel mainpanel;
     private efectos.MaterialColor materialColor1;
     private javax.swing.JPanel pnback;
+    private rojerusan.RSButtonIconD rSButtonIconD1;
     // End of variables declaration//GEN-END:variables
 }
