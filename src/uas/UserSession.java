@@ -15,6 +15,7 @@ public class UserSession {
     private String namaUser;
     private String alamatU;
     private String nomortelepon;
+    private String email;
 
     private UserSession() {}
 
@@ -25,11 +26,12 @@ public class UserSession {
         return instance;
     }
 
-    public void setUser(String idUser, String namaUser, String alamatU, String nomortelepon) {
+    public void setUser(String idUser, String namaUser, String alamatU, String nomortelepon, String email) {
         this.idUser = idUser;
         this.namaUser = namaUser;
         this.alamatU = alamatU;
         this.nomortelepon = nomortelepon;
+        this.email = email;
     }
 
     public String getIdUser() {
@@ -46,6 +48,10 @@ public class UserSession {
     
     public String getNoTelponUser() {
         return nomortelepon;
+    }
+    
+     public String getEmail() {
+        return email;
     }
     
     public void clearSession() {

@@ -233,7 +233,7 @@ public class Login extends javax.swing.JFrame {
 
             if (rs.next()) {
                 // Ambil data role dan id_user dari hasil query
-                UserSession.getInstance().setUser(rs.getString("id_user"), rs.getString("username"), rs.getString("alamat"), rs.getString("nomor_telepon"));
+                UserSession.getInstance().setUser(rs.getString("id_user"), rs.getString("username"), rs.getString("alamat"), rs.getString("nomor_telepon"), rs.getString("email"));
                 idUserLogin = rs.getString("id_user");
                 userRole = rs.getString("role");
 

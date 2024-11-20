@@ -613,7 +613,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="rSMaterialButtonRectangle1" min="-2" pref="204" max="-2" attributes="0"/>
                           <EmptySpace pref="27" max="32767" attributes="0"/>
-                          <Component id="rSMaterialButtonRectangle3" min="-2" pref="204" max="-2" attributes="0"/>
+                          <Component id="btnmenutransaksi" min="-2" pref="204" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="rSMaterialButtonRectangle2" min="-2" pref="204" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -627,7 +627,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="rSMaterialButtonRectangle1" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="rSMaterialButtonRectangle2" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                              <Component id="rSMaterialButtonRectangle3" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                              <Component id="btnmenutransaksi" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -648,10 +648,13 @@
                     <Property name="text" type="java.lang.String" value="Pengguna"/>
                   </Properties>
                 </Component>
-                <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle3">
+                <Component class="rojerusan.RSMaterialButtonRectangle" name="btnmenutransaksi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transaksi"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnmenutransaksiActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

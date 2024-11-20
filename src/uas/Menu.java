@@ -22,11 +22,12 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Login1
      */
     String namaUser = UserSession.getInstance().getNamaUser();
+
     public Menu() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
-        lblselamatdatang.setText("Selamat Datang "+namaUser+" di D'Star");
+        lblselamatdatang.setText("Selamat Datang " + namaUser + " di D'Star");
     }
 
     /**
@@ -69,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
-        rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
+        btnmenutransaksi = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -440,7 +441,12 @@ public class Menu extends javax.swing.JFrame {
 
         rSMaterialButtonRectangle2.setText("Pengguna");
 
-        rSMaterialButtonRectangle3.setText("Transaksi");
+        btnmenutransaksi.setText("Transaksi");
+        btnmenutransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenutransaksiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -450,7 +456,7 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnmenutransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -462,7 +468,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnmenutransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -596,6 +602,13 @@ public class Menu extends javax.swing.JFrame {
         menu.setVisible(false);
     }//GEN-LAST:event_jLabel8MouseClicked
 
+    private void btnmenutransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksiActionPerformed
+        menuuser.transaksi riwayat = new menuuser.transaksi();
+        Menu menu = new Menu();
+        riwayat.setVisible(true);
+        menu.setVisible(false);
+    }//GEN-LAST:event_btnmenutransaksiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -639,6 +652,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSMaterialButtonRectangle btnmenutransaksi;
     private javax.swing.JDesktopPane candy;
     private javax.swing.JPanel dekstopPane;
     private javax.swing.JLabel exit;
@@ -670,6 +684,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel minimize;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
     // End of variables declaration//GEN-END:variables
 }
