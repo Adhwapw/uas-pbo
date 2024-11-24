@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uas.Koneksi;
@@ -137,6 +138,8 @@ public class dataproduk extends javax.swing.JFrame {
     }
 
     public dataproduk() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
+        this.setUndecorated(true);
         initComponents();
         loadTable();
         tabelproduk.getSelectionModel().addListSelectionListener(e -> {
@@ -172,11 +175,15 @@ public class dataproduk extends javax.swing.JFrame {
         btntambahproduk = new javax.swing.JButton();
         txtstok = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        exit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1279, 533));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabelproduk.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,19 +204,19 @@ public class dataproduk extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelproduk);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 56, 475, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 76, 940, 450));
 
         txtnama.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nama", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-        jPanel1.add(txtnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 280, -1));
+        jPanel1.add(txtnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 210, 280, -1));
 
         txtkategori.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Kategori", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-        jPanel1.add(txtkategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 280, -1));
+        jPanel1.add(txtkategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 260, 280, -1));
 
         txtdeskripsi.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Deskripsi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-        jPanel1.add(txtdeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 280, -1));
+        jPanel1.add(txtdeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, 280, -1));
 
         txtharga.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Harga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-        jPanel1.add(txtharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 240, 280, -1));
+        jPanel1.add(txtharga, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 360, 280, -1));
 
         search.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         search.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -217,11 +224,11 @@ public class dataproduk extends javax.swing.JFrame {
                 searchKeyReleased(evt);
             }
         });
-        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 23, 159, -1));
+        jPanel1.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 100, 159, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Data Produk");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 150, 60));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Search");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 70, 90, 30));
 
         btnhapusproduk.setText("Hapus");
         btnhapusproduk.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +236,7 @@ public class dataproduk extends javax.swing.JFrame {
                 btnhapusprodukActionPerformed(evt);
             }
         });
-        jPanel1.add(btnhapusproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
+        jPanel1.add(btnhapusproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 470, 80, 50));
 
         btneeditproduk.setText("Edit");
         btneeditproduk.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +244,7 @@ public class dataproduk extends javax.swing.JFrame {
                 btneeditprodukActionPerformed(evt);
             }
         });
-        jPanel1.add(btneeditproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, -1, -1));
+        jPanel1.add(btneeditproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 470, 90, 50));
 
         btntambahproduk.setText("Simpan");
         btntambahproduk.addActionListener(new java.awt.event.ActionListener() {
@@ -245,13 +252,48 @@ public class dataproduk extends javax.swing.JFrame {
                 btntambahprodukActionPerformed(evt);
             }
         });
-        jPanel1.add(btntambahproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 360, -1, -1));
+        jPanel1.add(btntambahproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 470, 70, 50));
 
         txtstok.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Stok", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-        jPanel1.add(txtstok, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 280, -1));
+        txtstok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtstokActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtstok, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 410, 280, -1));
 
         jButton1.setText("Kembali");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 80, 90, 40));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Data Produk");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 160, 150, 40));
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+
+        exit.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exit.setText("X");
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(1223, Short.MAX_VALUE)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -393,6 +435,15 @@ public class dataproduk extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tabelprodukMouseClicked
 
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitMouseClicked
+
+    private void txtstokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstokActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtstokActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,9 +483,12 @@ public class dataproduk extends javax.swing.JFrame {
     private javax.swing.JButton btneeditproduk;
     private javax.swing.JButton btnhapusproduk;
     private javax.swing.JButton btntambahproduk;
+    private javax.swing.JLabel exit;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField search;
     private javax.swing.JTable tabelproduk;

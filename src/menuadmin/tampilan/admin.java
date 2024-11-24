@@ -26,6 +26,8 @@ public class admin extends javax.swing.JFrame {
      * Creates new form admin
      */
     public admin() {
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
+        this.setUndecorated(true);
         initComponents();
 
     }
@@ -44,6 +46,7 @@ public class admin extends javax.swing.JFrame {
         materialColor1 = new efectos.MaterialColor();
         pnback = new javax.swing.JPanel();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
+        exit15 = new javax.swing.JLabel();
         kGradientPanel2 = new com.k33ptoo.components.KGradientPanel();
         btndataadmin = new rojerusan.RSButtonIconD();
         rSButtonIconD2 = new rojerusan.RSButtonIconD();
@@ -52,13 +55,27 @@ public class admin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
         setResizable(false);
-        setSize(new java.awt.Dimension(600, 500));
+        setSize(new java.awt.Dimension(1279, 646));
 
         pnback.setBackground(new java.awt.Color(255, 255, 255));
+        pnback.setPreferredSize(new java.awt.Dimension(1279, 646));
 
         kGradientPanel1.setkEndColor(new java.awt.Color(255, 245, 228));
         kGradientPanel1.setkGradientFocus(900);
         kGradientPanel1.setkStartColor(new java.awt.Color(255, 227, 225));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 15, 5);
+        flowLayout1.setAlignOnBaseline(true);
+        kGradientPanel1.setLayout(flowLayout1);
+
+        exit15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        exit15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exit15.setText("X");
+        exit15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exit15MouseClicked(evt);
+            }
+        });
+        kGradientPanel1.add(exit15);
 
         kGradientPanel2.setkEndColor(new java.awt.Color(204, 204, 255));
         kGradientPanel2.setkStartColor(new java.awt.Color(255, 204, 204));
@@ -89,23 +106,20 @@ public class admin extends javax.swing.JFrame {
         pnbackLayout.setHorizontalGroup(
             pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnbackLayout.createSequentialGroup()
-                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
-            .addGroup(pnbackLayout.createSequentialGroup()
                 .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnbackLayout.setVerticalGroup(
             pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnbackLayout.createSequentialGroup()
                 .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                     .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         getContentPane().add(pnback, java.awt.BorderLayout.LINE_START);
@@ -124,6 +138,11 @@ public class admin extends javax.swing.JFrame {
         p.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_rSButtonIconD2ActionPerformed
+
+    private void exit15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit15MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exit15MouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,6 +181,22 @@ public class admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconD btndataadmin;
+    private javax.swing.JLabel exit;
+    private javax.swing.JLabel exit1;
+    private javax.swing.JLabel exit10;
+    private javax.swing.JLabel exit11;
+    private javax.swing.JLabel exit12;
+    private javax.swing.JLabel exit13;
+    private javax.swing.JLabel exit14;
+    private javax.swing.JLabel exit15;
+    private javax.swing.JLabel exit2;
+    private javax.swing.JLabel exit3;
+    private javax.swing.JLabel exit4;
+    private javax.swing.JLabel exit5;
+    private javax.swing.JLabel exit6;
+    private javax.swing.JLabel exit7;
+    private javax.swing.JLabel exit8;
+    private javax.swing.JLabel exit9;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
     private javax.swing.JPanel mainpanel;
