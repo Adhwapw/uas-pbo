@@ -18,7 +18,7 @@ import uas.Koneksi;
  *
  * @author adhwa
  */
-public class adminproduk extends javax.swing.JFrame {
+public class admindataproduk extends javax.swing.JFrame {
 
     users u = new users();
 
@@ -140,7 +140,7 @@ public class adminproduk extends javax.swing.JFrame {
     /**
      * Creates new form admin
      */
-    public adminproduk() {
+    public admindataproduk() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
@@ -218,7 +218,7 @@ public class adminproduk extends javax.swing.JFrame {
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btndataadmin.setBackground(new java.awt.Color(255, 148, 148));
-        btndataadmin.setText("Admin");
+        btndataadmin.setText("Data User");
         btndataadmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndataadminActionPerformed(evt);
@@ -414,18 +414,17 @@ public class adminproduk extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndataadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndataadminActionPerformed
-        datauser u = new datauser();
+        admindatauser u = new admindatauser();
         u.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btndataadminActionPerformed
 
     private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
         // TODO add your handling code here:
+        admindataproduk p = new admindataproduk();
+        p.setVisible(true);
+        this.dispose(); 
     }//GEN-LAST:event_rSButtonIconD2ActionPerformed
-
-    private void tabelprodukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelprodukMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabelprodukMouseClicked
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         String keyword = search.getText();
@@ -560,6 +559,10 @@ public class adminproduk extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMouseClicked
 
+    private void tabelprodukMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelprodukMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelprodukMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -577,21 +580,23 @@ public class adminproduk extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(adminproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindataproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(adminproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindataproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(adminproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindataproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(adminproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindataproduk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new adminproduk().setVisible(true);
+                new admindataproduk().setVisible(true);
             }
         });
     }

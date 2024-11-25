@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import uas.Koneksi;
+import uas.Menu;
 import uas.UserSession;
 
 /**
@@ -243,8 +244,18 @@ public class Reloaddesc extends javax.swing.JFrame {
         });
 
         rSMaterialButtonRectangle2.setText("Pengguna");
+        rSMaterialButtonRectangle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle2ActionPerformed(evt);
+            }
+        });
 
         rSMaterialButtonRectangle3.setText("Transaksi");
+        rSMaterialButtonRectangle3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -492,6 +503,8 @@ public class Reloaddesc extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMouseClicked
 
     private void btnmenuawalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuawalActionPerformed
+        Menu menu = new Menu();
+        menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnmenuawalActionPerformed
 
@@ -572,6 +585,20 @@ public class Reloaddesc extends javax.swing.JFrame {
     private void tAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tAlamatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tAlamatActionPerformed
+
+    private void rSMaterialButtonRectangle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle3ActionPerformed
+        // TODO add your handling code here:
+        menuuser.transaksi riwayat = new menuuser.transaksi();
+        riwayat.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSMaterialButtonRectangle3ActionPerformed
+
+    private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
+        // TODO add your handling code here:
+        menuuser.Profil profil = new menuuser.Profil();
+        profil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -339,11 +339,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pengguna"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle2ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle3">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transaksi"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle3ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

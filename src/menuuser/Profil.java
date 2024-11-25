@@ -130,8 +130,18 @@ public class Profil extends javax.swing.JFrame {
         });
 
         rSMaterialButtonRectangle2.setText("Pengguna");
+        rSMaterialButtonRectangle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle2ActionPerformed(evt);
+            }
+        });
 
         rSMaterialButtonRectangle3.setText("Transaksi");
+        rSMaterialButtonRectangle3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -160,6 +170,7 @@ public class Profil extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/profil.png"))); // NOI18N
 
         lbluser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbluser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbluser.setText("Username");
 
         jButton1.setBackground(new java.awt.Color(204, 204, 255));
@@ -211,9 +222,6 @@ public class Profil extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(519, 519, 519)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(lbluser))
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -236,7 +244,10 @@ public class Profil extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblemail)
                                     .addComponent(lbltelepon)
-                                    .addComponent(lblalamat))))))
+                                    .addComponent(lblalamat)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(lbluser, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64)))))
                 .addContainerGap(519, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -294,6 +305,9 @@ public class Profil extends javax.swing.JFrame {
 
     private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
         // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -309,6 +323,20 @@ public class Profil extends javax.swing.JFrame {
         Login loginForm = new Login();
         loginForm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rSMaterialButtonRectangle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle3ActionPerformed
+        // TODO add your handling code here:
+        menuuser.Profil profil = new menuuser.Profil();
+        profil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSMaterialButtonRectangle3ActionPerformed
+
+    private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
+        // TODO add your handling code here:
+        menuuser.transaksi riwayat = new menuuser.transaksi();
+        riwayat.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
 
     /**
      * @param args the command line arguments

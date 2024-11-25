@@ -213,6 +213,9 @@ public class Register extends javax.swing.JFrame {
 
     private void kembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kembaliMouseClicked
         // TODO add your handling code here:
+        Login lgn = new Login();
+        lgn.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_kembaliMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -300,6 +303,9 @@ public class Register extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Pendaftaran gagal!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+                Login lgn = new Login();
+                lgn.setVisible(true);
+                this.dispose();
 
             conn.close();
         } catch (SQLException ex) {

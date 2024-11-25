@@ -18,20 +18,65 @@ import uas.Koneksi;
  *
  * @author adhwa
  */
-public class admin extends javax.swing.JFrame {
+public class admintransaksi extends javax.swing.JFrame {
 
     users u = new users();
 
     /**
      * Creates new form admin
      */
-    public admin() {
+    public admintransaksi() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
-
+        loadTable();
     }
+    private void loadTable() {
+        try {
+            // Hubungkan ke database
+            Koneksi db = new Koneksi();
+            Connection con = db.connect();
 
+            // Query untuk mengambil data dari tabel users
+            String sql = "SELECT * FROM orders";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            // Buat model untuk JTable
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("ID Order");
+            model.addColumn("ID user");
+            model.addColumn("Order Date");
+            model.addColumn("Total");
+            model.addColumn("Payment Status");
+            model.addColumn("Order Status");
+            model.addColumn("Quantity");
+            model.addColumn("Payment Method");
+            model.addColumn("ID Produk");
+
+            // Loop hasil query dan tambahkan ke model
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id_order"),
+                    rs.getString("id_user"),
+                    rs.getString("order_date"),
+                    rs.getString("payment_status"),
+                    rs.getString("status"),
+                    rs.getString("quantity"),
+                    rs.getString("metode_bayar"),
+                    rs.getString("id_produk")
+                });
+            }
+
+            // Set model ke JTable
+            tabeltransaksi.setModel(model);
+
+            // Tutup koneksi
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal menampilkan data: " + ex.getMessage());
+        }
+}
     
 
     /**
@@ -51,6 +96,8 @@ public class admin extends javax.swing.JFrame {
         btndataadmin = new rojerusan.RSButtonIconD();
         rSButtonIconD2 = new rojerusan.RSButtonIconD();
         mainpanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabeltransaksi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -100,6 +147,21 @@ public class admin extends javax.swing.JFrame {
         kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, -1));
 
         mainpanel.setLayout(new java.awt.CardLayout());
+
+        tabeltransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabeltransaksi);
+
+        mainpanel.add(jScrollPane1, "card2");
 
         javax.swing.GroupLayout pnbackLayout = new javax.swing.GroupLayout(pnback);
         pnback.setLayout(pnbackLayout);
@@ -161,20 +223,21 @@ public class admin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new admin().setVisible(true);
+                new admintransaksi().setVisible(true);
             }
         });
     }
@@ -182,11 +245,13 @@ public class admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconD btndataadmin;
     private javax.swing.JLabel exit15;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
     private javax.swing.JPanel mainpanel;
     private efectos.MaterialColor materialColor1;
     private javax.swing.JPanel pnback;
     private rojerusan.RSButtonIconD rSButtonIconD2;
+    private javax.swing.JTable tabeltransaksi;
     // End of variables declaration//GEN-END:variables
 }

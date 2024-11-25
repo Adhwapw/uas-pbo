@@ -72,7 +72,6 @@ public class Menu extends javax.swing.JFrame {
         btnmenutransaksi = new rojerusan.RSMaterialButtonRectangle();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1279, 646));
         setResizable(false);
 
         dekstopPane.setPreferredSize(new java.awt.Dimension(1279, 646));
@@ -440,6 +439,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         rSMaterialButtonRectangle2.setText("Pengguna");
+        rSMaterialButtonRectangle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle2ActionPerformed(evt);
+            }
+        });
 
         btnmenutransaksi.setText("Transaksi");
         btnmenutransaksi.addActionListener(new java.awt.event.ActionListener() {
@@ -481,10 +485,10 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(429, 429, 429)
-                        .addComponent(lblselamatdatang))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(405, 405, 405)
+                        .addComponent(lblselamatdatang)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -526,89 +530,85 @@ public class Menu extends javax.swing.JFrame {
     private void candyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candyMouseClicked
         // TODO add your handling code here:
         Candydesc candy = new Candydesc();
-        Menu menu = new Menu();
         candy.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_candyMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         Candydesc candy = new Candydesc();
-        Menu menu = new Menu();
         candy.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jDesktopPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane5MouseClicked
         // TODO add your handling code here:
         Reloaddesc reload = new Reloaddesc();
-        Menu menu = new Menu();
         reload.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jDesktopPane5MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
         Reloaddesc reload = new Reloaddesc();
-        Menu menu = new Menu();
         reload.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jDesktopPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane2MouseClicked
         // TODO add your handling code here:
         Dreamscapedesc dream = new Dreamscapedesc();
-        Menu menu = new Menu();
         dream.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jDesktopPane2MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         Dreamscapedesc dream = new Dreamscapedesc();
-        Menu menu = new Menu();
         dream.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jDesktopPane4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane4MouseClicked
         // TODO add your handling code here:
         Lightstickdesc lightstick = new Lightstickdesc();
-        Menu menu = new Menu();
         lightstick.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jDesktopPane4MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         // TODO add your handling code here:
         Lightstickdesc lightstick = new Lightstickdesc();
-        Menu menu = new Menu();
         lightstick.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jDesktopPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane3MouseClicked
         // TODO add your handling code here:
         Hotsaucedesc hotsauce = new Hotsaucedesc();
-        Menu menu = new Menu();
         hotsauce.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jDesktopPane3MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
         Hotsaucedesc hotsauce = new Hotsaucedesc();
-        Menu menu = new Menu();
         hotsauce.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void btnmenutransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksiActionPerformed
         menuuser.transaksi riwayat = new menuuser.transaksi();
-        Menu menu = new Menu();
         riwayat.setVisible(true);
-        menu.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnmenutransaksiActionPerformed
+
+    private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
+        // TODO add your handling code here:
+        menuuser.Profil profil = new menuuser.Profil();
+        profil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,12 +4,13 @@
  */
 package menuadmin.tampilan;
 
+import static uas.Register.main;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import uas.Koneksi;
 
@@ -17,18 +18,20 @@ import uas.Koneksi;
  *
  * @author adhwa
  */
-public class datauser extends javax.swing.JFrame {
+public class admindatauser extends javax.swing.JFrame {
+
+    users u = new users();
 
     /**
-     * Creates new form datauser
+     * Creates new form admin
      */
-    public datauser() {
+    public admindatauser() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
         tampilkanData();
     }
-
+    
     private void tampilkanData() {
         try {
             // Hubungkan ke database
@@ -71,6 +74,8 @@ public class datauser extends javax.swing.JFrame {
         }
     }
 
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,46 +85,66 @@ public class datauser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        exit = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabeluser = new rojerusan.RSTableMetro();
+        materialColor1 = new efectos.MaterialColor();
+        pnback = new javax.swing.JPanel();
+        kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
+        exit15 = new javax.swing.JLabel();
+        kGradientPanel2 = new com.k33ptoo.components.KGradientPanel();
+        btndataadmin = new rojerusan.RSButtonIconD();
+        rSButtonIconD2 = new rojerusan.RSButtonIconD();
         btnedituser = new rojerusan.RSButtonIconD();
         btnhapustuser = new rojerusan.RSButtonIconD();
         btntambahtuser = new rojerusan.RSButtonIconD();
-        btnbackdtuser = new rojerusan.RSButtonIconD();
+        mainpanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabeluser = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setSize(new java.awt.Dimension(1279, 646));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1279, 646));
+        pnback.setBackground(new java.awt.Color(255, 255, 255));
+        pnback.setPreferredSize(new java.awt.Dimension(1279, 646));
 
-        exit.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        exit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        exit.setText("X");
-        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        kGradientPanel1.setkEndColor(new java.awt.Color(255, 245, 228));
+        kGradientPanel1.setkGradientFocus(900);
+        kGradientPanel1.setkStartColor(new java.awt.Color(255, 227, 225));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 15, 5);
+        flowLayout1.setAlignOnBaseline(true);
+        kGradientPanel1.setLayout(flowLayout1);
+
+        exit15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        exit15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exit15.setText("X");
+        exit15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitMouseClicked(evt);
+                exit15MouseClicked(evt);
             }
         });
+        kGradientPanel1.add(exit15);
 
-        tabeluser.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        kGradientPanel2.setkEndColor(new java.awt.Color(204, 204, 255));
+        kGradientPanel2.setkStartColor(new java.awt.Color(255, 204, 204));
+        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btndataadmin.setBackground(new java.awt.Color(255, 148, 148));
+        btndataadmin.setText("Data User");
+        btndataadmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndataadminActionPerformed(evt);
             }
-        ));
-        tabeluser.setFuenteFilas(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tabeluser.setFuenteHead(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jScrollPane1.setViewportView(tabeluser);
+        });
+        kGradientPanel2.add(btndataadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
+
+        rSButtonIconD2.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD2.setText("Data Produk");
+        rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD2ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, -1));
 
         btnedituser.setBackground(new java.awt.Color(255, 153, 153));
         btnedituser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-edit-25.png"))); // NOI18N
@@ -130,6 +155,7 @@ public class datauser extends javax.swing.JFrame {
                 btnedituserActionPerformed(evt);
             }
         });
+        kGradientPanel2.add(btnedituser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 150, 40));
 
         btnhapustuser.setBackground(new java.awt.Color(255, 153, 153));
         btnhapustuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-delete-24.png"))); // NOI18N
@@ -140,6 +166,7 @@ public class datauser extends javax.swing.JFrame {
                 btnhapustuserActionPerformed(evt);
             }
         });
+        kGradientPanel2.add(btnhapustuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 150, -1));
 
         btntambahtuser.setBackground(new java.awt.Color(255, 153, 153));
         btntambahtuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-create-24.png"))); // NOI18N
@@ -150,59 +177,150 @@ public class datauser extends javax.swing.JFrame {
                 btntambahtuserActionPerformed(evt);
             }
         });
+        kGradientPanel2.add(btntambahtuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 150, -1));
 
-        btnbackdtuser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-back-50.png"))); // NOI18N
-        btnbackdtuser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackdtuserActionPerformed(evt);
+        mainpanel.setLayout(new java.awt.CardLayout());
+
+        tabeluser.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Produk", "Nama Produk", "Title 3", "Title 4"
+            }
+        ));
+        tabeluser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabeluserMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(tabeluser);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnbackdtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnedituser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnhapustuser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btntambahtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 903, Short.MAX_VALUE)))
+        mainpanel.add(jScrollPane1, "card2");
+
+        javax.swing.GroupLayout pnbackLayout = new javax.swing.GroupLayout(pnback);
+        pnback.setLayout(pnbackLayout);
+        pnbackLayout.setHorizontalGroup(
+            pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnbackLayout.createSequentialGroup()
+                .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE))
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnbackLayout.setVerticalGroup(
+            pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnbackLayout.createSequentialGroup()
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(mainpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbackdtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(127, 127, 127)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnedituser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhapustuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btntambahtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(pnback, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btndataadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndataadminActionPerformed
+    admindatauser u = new admindatauser();
+        u.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_btndataadminActionPerformed
+
+    private void rSButtonIconD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD2ActionPerformed
+    admindataproduk p = new admindataproduk();
+        p.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_rSButtonIconD2ActionPerformed
+
+    private void exit15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exit15MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exit15MouseClicked
+
+    private void tabeluserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeluserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabeluserMouseClicked
+
+    private void btnedituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedituserActionPerformed
+        try {
+            // Pastikan ada baris yang dipilih
+            int row = tabeluser.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Pilih data yang akan diedit!");
+                return;
+            }
+
+            // Ambil data dari tabel
+            String idUser = tabeluser.getValueAt(row, 0).toString();
+            String currentUsername = tabeluser.getValueAt(row, 1).toString();
+            String currentEmail = tabeluser.getValueAt(row, 2).toString();
+            String currentRole = tabeluser.getValueAt(row, 3).toString();
+            String currentNoTelp = tabeluser.getValueAt(row, 4).toString();
+            String currentAlamat = tabeluser.getValueAt(row, 5).toString();
+
+            // Ambil input baru dari pengguna
+            String newUsername = JOptionPane.showInputDialog(this, "Edit Username:", currentUsername);
+            if (newUsername == null || newUsername.trim().isEmpty()) {
+                return;
+            }
+
+            String newEmail = JOptionPane.showInputDialog(this, "Edit Email:", currentEmail);
+            if (newEmail == null || newEmail.trim().isEmpty() || !newEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                return;
+            }
+
+            String newRole = JOptionPane.showInputDialog(this, "Edit Role (admin/customer):", currentRole);
+            if (newRole == null || (!newRole.equalsIgnoreCase("admin") && !newRole.equalsIgnoreCase("customer"))) {
+                return;
+            }
+
+            String newNoTelp = JOptionPane.showInputDialog(this, "Edit Nomor Telepon:", currentNoTelp);
+            if (newNoTelp == null || newNoTelp.trim().isEmpty() || !newNoTelp.matches("\\d+")) {
+                return;
+            }
+
+            String newAlamat = JOptionPane.showInputDialog(this, "Edit Alamat:", currentAlamat);
+            if (newAlamat == null || newAlamat.trim().isEmpty()) {
+                return;
+            }
+
+            // Hubungkan ke database
+            Koneksi db = new Koneksi();
+            Connection conn = db.connect();
+
+            // Query untuk mengupdate data
+            String sql = "UPDATE users SET username = ?, email = ?, role = ?, nomor_telepon = ?, alamat = ? WHERE id_user = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Isi parameter query
+            stmt.setString(1, newUsername);
+            stmt.setString(2, newEmail);
+            stmt.setString(3, newRole.toLowerCase());
+            stmt.setString(4, newNoTelp);
+            stmt.setString(5, newAlamat);
+            stmt.setString(6, idUser);
+
+            // Eksekusi query
+            stmt.executeUpdate();
+
+            // Tampilkan pesan sukses
+            JOptionPane.showMessageDialog(this, "Data berhasil diubah!");
+
+            // Refresh tabel
+            tampilkanData();
+
+            conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnedituserActionPerformed
 
     private void btnhapustuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapustuserActionPerformed
         try {
@@ -318,91 +436,6 @@ public class datauser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btntambahtuserActionPerformed
 
-    private void btnedituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedituserActionPerformed
-        try {
-            // Pastikan ada baris yang dipilih
-            int row = tabeluser.getSelectedRow();
-            if (row == -1) {
-                JOptionPane.showMessageDialog(this, "Pilih data yang akan diedit!");
-                return;
-            }
-
-            // Ambil data dari tabel
-            String idUser = tabeluser.getValueAt(row, 1).toString();
-            String currentUsername = tabeluser.getValueAt(row, 2).toString();
-            String currentEmail = tabeluser.getValueAt(row, 3).toString();
-            String currentRole = tabeluser.getValueAt(row, 4).toString();
-            String currentNoTelp = tabeluser.getValueAt(row, 5).toString();
-            String currentAlamat = tabeluser.getValueAt(row, 6).toString();
-
-            // Ambil input baru dari pengguna
-            String newUsername = JOptionPane.showInputDialog(this, "Edit Username:", currentUsername);
-            if (newUsername == null || newUsername.trim().isEmpty()) {
-                return;
-            }
-
-            String newEmail = JOptionPane.showInputDialog(this, "Edit Email:", currentEmail);
-            if (newEmail == null || newEmail.trim().isEmpty() || !newEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-                return;
-            }
-
-            String newRole = JOptionPane.showInputDialog(this, "Edit Role (admin/customer):", currentRole);
-            if (newRole == null || (!newRole.equalsIgnoreCase("admin") && !newRole.equalsIgnoreCase("customer"))) {
-                return;
-            }
-
-            String newNoTelp = JOptionPane.showInputDialog(this, "Edit Nomor Telepon:", currentNoTelp);
-            if (newNoTelp == null || newNoTelp.trim().isEmpty() || !newNoTelp.matches("\\d+")) {
-                return;
-            }
-
-            String newAlamat = JOptionPane.showInputDialog(this, "Edit Alamat:", currentAlamat);
-            if (newAlamat == null || newAlamat.trim().isEmpty()) {
-                return;
-            }
-
-            // Hubungkan ke database
-            Koneksi db = new Koneksi();
-            Connection conn = db.connect();
-
-            // Query untuk mengupdate data
-            String sql = "UPDATE users SET username = ?, email = ?, role = ?, nomor_telepon = ?, alamat = ? WHERE id_user = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-
-            // Isi parameter query
-            stmt.setString(1, newUsername);
-            stmt.setString(2, newEmail);
-            stmt.setString(3, newRole.toLowerCase());
-            stmt.setString(4, newNoTelp);
-            stmt.setString(5, newAlamat);
-            stmt.setString(6, idUser);
-
-            // Eksekusi query
-            stmt.executeUpdate();
-
-            // Tampilkan pesan sukses
-            JOptionPane.showMessageDialog(this, "Data berhasil diubah!");
-
-            // Refresh tabel
-            tampilkanData();
-
-            conn.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + ex.getMessage());
-        }
-    }//GEN-LAST:event_btnedituserActionPerformed
-
-    private void btnbackdtuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackdtuserActionPerformed
-        admin a = new admin();
-        a.setVisible(true);
-        this.dispose(); 
-    }//GEN-LAST:event_btnbackdtuserActionPerformed
-
-    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_exitMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -420,32 +453,38 @@ public class datauser extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(datauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindatauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(datauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindatauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(datauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindatauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(datauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindatauser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new datauser().setVisible(true);
+                new admindatauser().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSButtonIconD btnbackdtuser;
+    private rojerusan.RSButtonIconD btndataadmin;
     private rojerusan.RSButtonIconD btnedituser;
     private rojerusan.RSButtonIconD btnhapustuser;
     private rojerusan.RSButtonIconD btntambahtuser;
-    private javax.swing.JLabel exit;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel exit15;
     private javax.swing.JScrollPane jScrollPane1;
-    private rojerusan.RSTableMetro tabeluser;
+    private com.k33ptoo.components.KGradientPanel kGradientPanel1;
+    private com.k33ptoo.components.KGradientPanel kGradientPanel2;
+    private javax.swing.JPanel mainpanel;
+    private efectos.MaterialColor materialColor1;
+    private javax.swing.JPanel pnback;
+    private rojerusan.RSButtonIconD rSButtonIconD2;
+    private javax.swing.JTable tabeluser;
     // End of variables declaration//GEN-END:variables
 }

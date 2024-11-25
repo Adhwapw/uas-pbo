@@ -3,9 +3,6 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1279, 646]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -336,11 +333,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pengguna"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle2ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle3">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Transaksi"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle3ActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

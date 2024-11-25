@@ -3,9 +3,6 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1279, 646]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -114,11 +111,11 @@
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jPanel5" alignment="0" min="-2" pref="1279" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="429" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="405" max="-2" attributes="0"/>
                               <Component id="lblselamatdatang" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel5" alignment="0" min="-2" pref="1279" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -662,6 +659,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pengguna"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle2ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="btnmenutransaksi">
                   <Properties>
