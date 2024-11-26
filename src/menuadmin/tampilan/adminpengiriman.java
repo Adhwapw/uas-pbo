@@ -29,60 +29,60 @@ public class adminpengiriman extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
+        tabelpengiriman.setModel(new DefaultTableModel(
+        null,
+            new String[]{"ID Order", "Nama Produk", "Jumlah", "Tanggal Pesanan", 
+                 "Alamat", "Email", "Nomor Telepon", "Status Pesanan"}
+        ));
+
         loadTable();
     }
     private void loadTable() {
-        
-        try {
-            // Hubungkan ke database
-            Koneksi db = new Koneksi();
-            Connection con = db.connect();
+    try {
+        // Hubungkan ke database
+        Koneksi db = new Koneksi();
+        Connection con = db.connect();
 
-            // Query untuk mengambil data dari tabel users
-            String sql = "SELECT o.id_order As id_order, p.nama AS nama_produk, o.quantity AS jumlah, o.order_date AS tanggal_pesanan, u.alamat AS alamat, u.email AS email, u.nomor telepon AS nomor_telepon o.status AS status_pesanan "
-                    + "FROM orders o "
-                    + "JOIN users u ON o.id_user = u.id_user "
-                    + "JOIN products p ON o.id_product = p.id_product "
-                    + "WHERE o.id_user = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
-            
-            //buat model untuk table
-            DefaultTableModel model = (DefaultTableModel) tabelpengiriman.getModel();
-            model.setRowCount(0); // Kosongkan tabel sebelum mengisi ulang data
-            model.addColumn("ID Order");
-            model.addColumn("nama Produk");
-            model.addColumn("Jumlah");
-            model.addColumn("Tanggal Pesanan");
-            model.addColumn("Alamat");
-            model.addColumn("Email");
-            model.addColumn("Nomor Telepon");
-            model.addColumn("Status Pesanan");
+        // Query untuk mengambil semua data
+        String sql = "SELECT o.id_order AS ID_Order, p.nama AS Nama_Produk, o.quantity AS Jumlah, "
+                   + "o.order_date AS Tanggal_Pesanan, u.alamat AS Alamat, u.email AS Email, "
+                   + "u.nomor_telepon AS Nomor_Telepon, o.status AS Status_Pesanan "
+                   + "FROM orders o "
+                   + "JOIN users u ON o.id_user = u.id_user "
+                   + "JOIN products p ON o.id_product = p.id_product";
 
-            // Loop hasil query dan tambahkan ke model
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                // Ambil data dari setiap baris hasil query
-                String idorder = rs.getString("id_order");
-                String namaproduk = rs.getString("nama_produk");
-                int jumlah = rs.getInt("jumlah");
-                String tanggal = rs.getString("tanggal_pesanan");
-                String alamat = rs.getString("alamat");
-                String email = rs.getString("email");
-                String telepon = rs.getString("nomor_telepon");
-                String statusPesanan = rs.getString("status_pesanan");
+        PreparedStatement pst = con.prepareStatement(sql);
 
-                // Tambahkan data ke tabel di GUI
-                model.addRow(new Object[]{idorder, namaproduk, jumlah, tanggal, alamat, email, telepon, statusPesanan});
-            }
-            
-            tabelpengiriman.setModel(model);
+        // Buat model tabel
+        DefaultTableModel model = (DefaultTableModel) tabelpengiriman.getModel();
+        model.setRowCount(0); // Kosongkan tabel sebelum mengisi ulang data
 
-            // Tutup koneksi
-            con.close();
-        } catch (Exception e) {
-            System.out.println("Error saat memuat riwayat transaksi: " + e.getMessage());
+        // Eksekusi query
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            // Ambil data dari setiap baris hasil query
+            model.addRow(new Object[]{
+                rs.getString("ID_Order"),
+                rs.getString("Nama_Produk"),
+                rs.getInt("Jumlah"),
+                rs.getString("Tanggal_Pesanan"),
+                rs.getString("Alamat"),
+                rs.getString("Email"),
+                rs.getString("Nomor_Telepon"),
+                rs.getString("Status_Pesanan")
+            });
         }
+
+        // Set model ke tabel
+        tabelpengiriman.setModel(model);
+
+        // Tutup koneksi
+        con.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error saat memuat data: " + e.getMessage());
+    }
 }
+
     
     
     private void searchTable(String keyword) {
@@ -355,8 +355,8 @@ public class adminpengiriman extends javax.swing.JFrame {
             String idorder = tabelpengiriman.getValueAt(row, 0).toString();
             String currentstatus = tabelpengiriman.getValueAt(row, 7).toString();
 
-            String newRole = JOptionPane.showInputDialog(this, "Edit Role (pending/shipped/terkirim):", currentstatus);
-            if (newRole == null || (!newRole.equalsIgnoreCase("pending") && !newRole.equalsIgnoreCase("shipped") && !newRole.equalsIgnoreCase("terkirim"))) {
+            String newStatus = JOptionPane.showInputDialog(this, "Edit Role (pending/shipped/terkirim):", currentstatus);
+            if (newStatus == null || (!newStatus.equalsIgnoreCase("pending") && !newStatus.equalsIgnoreCase("shipped") && !newStatus.equalsIgnoreCase("terkirim"))) {
                 return;
             }
 
@@ -365,12 +365,12 @@ public class adminpengiriman extends javax.swing.JFrame {
             Connection conn = db.connect();
 
             // Query untuk mengupdate data
-            String sql = "UPDATE users SET status = ? WHERE id_order = ?";
+            String sql = "UPDATE orders SET status = ? WHERE id_order = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             // Isi parameter query
-            stmt.setString(1, currentstatus);
-            stmt.setString(6, idorder);
+            stmt.setString(1, newStatus);
+            stmt.setString(2, idorder);
 
             // Eksekusi query
             stmt.executeUpdate();

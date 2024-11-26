@@ -52,7 +52,7 @@ public class admintransaksi extends javax.swing.JFrame {
             model.addColumn("Payment Status");
             model.addColumn("Order Status");
             model.addColumn("Quantity");
-            model.addColumn("Payment Method");
+            model.addColumn("Metode Pembayaran");
             model.addColumn("ID Produk");
 
             // Loop hasil query dan tambahkan ke model
@@ -61,11 +61,12 @@ public class admintransaksi extends javax.swing.JFrame {
                     rs.getString("id_order"),
                     rs.getString("id_user"),
                     rs.getString("order_date"),
+                    rs.getString("subtotal"),
                     rs.getString("payment_status"),
                     rs.getString("status"),
                     rs.getString("quantity"),
                     rs.getString("metode_bayar"),
-                    rs.getString("id_produk")
+                    rs.getString("id_product")
                 });
             }
 
@@ -78,6 +79,59 @@ public class admintransaksi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Gagal menampilkan data: " + ex.getMessage());
         }
 }
+    private void searchTable(String keyword) {
+    try {
+        // Hubungkan ke database
+        Koneksi db = new Koneksi();
+        Connection con = db.connect();
+
+        // Query untuk mencari data berdasarkan keyword
+        String sql = "SELECT o.id_order, o.id_user, o.order_date, o.subtotal, o.payment_status, "
+                   + "o.status, o.quantity, o.metode_bayar, o.id_product "
+                   + "FROM orders o "
+                   + "WHERE o.id_order LIKE ? OR o.id_user LIKE ? OR o.order_date LIKE ? "
+                   + "OR o.subtotal LIKE ? OR o.payment_status LIKE ? OR o.status LIKE ? "
+                   + "OR o.quantity LIKE ? OR o.metode_bayar LIKE ? OR o.id_product LIKE ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        // Set parameter query dengan keyword pencarian
+        for (int i = 1; i <= 9; i++) {
+            stmt.setString(i, "%" + keyword + "%");
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Dapatkan model tabel
+        DefaultTableModel model = (DefaultTableModel) tabeltransaksi.getModel();
+
+        // Kosongkan tabel sebelum mengisi ulang data
+        model.setRowCount(0);
+
+        // Loop hasil query dan tambahkan ke model
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getString("id_order"),
+                rs.getString("id_user"),
+                rs.getString("order_date"),
+                rs.getString("subtotal"),
+                rs.getString("payment_status"),
+                rs.getString("status"),
+                rs.getString("quantity"),
+                rs.getString("metode_bayar"),
+                rs.getString("id_product")
+            });
+        }
+
+        // Set model ke JTable
+        tabeltransaksi.setModel(model);
+
+        // Tutup koneksi
+        con.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Gagal mencari data: " + ex.getMessage());
+    }
+}
+
     
 
     /**
@@ -99,6 +153,8 @@ public class admintransaksi extends javax.swing.JFrame {
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
         rSButtonIconD3 = new rojerusan.RSButtonIconD();
         rSButtonIconD4 = new rojerusan.RSButtonIconD();
+        search = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeltransaksi = new javax.swing.JTable();
@@ -182,6 +238,23 @@ public class admintransaksi extends javax.swing.JFrame {
         });
         kGradientPanel2.add(rSButtonIconD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 40));
 
+        search.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchKeyReleased(evt);
+            }
+        });
+        kGradientPanel2.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 160, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Cari");
+        kGradientPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+
         mainpanel.setLayout(new java.awt.CardLayout());
 
         tabeltransaksi.setModel(new javax.swing.table.DefaultTableModel(
@@ -263,6 +336,15 @@ public class admintransaksi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rSButtonIconD4ActionPerformed
 
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
+        String keyword = search.getText();
+        searchTable(keyword);
+    }//GEN-LAST:event_searchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -302,6 +384,7 @@ public class admintransaksi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconD btndataadmin;
     private javax.swing.JLabel exit15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
@@ -312,6 +395,7 @@ public class admintransaksi extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD rSButtonIconD2;
     private rojerusan.RSButtonIconD rSButtonIconD3;
     private rojerusan.RSButtonIconD rSButtonIconD4;
+    private javax.swing.JTextField search;
     private javax.swing.JTable tabeltransaksi;
     // End of variables declaration//GEN-END:variables
 }
