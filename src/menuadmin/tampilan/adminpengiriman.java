@@ -18,63 +18,69 @@ import uas.Koneksi;
  *
  * @author adhwa
  */
-public class admintransaksi extends javax.swing.JFrame {
+public class adminpengiriman extends javax.swing.JFrame {
 
     users u = new users();
 
     /**
      * Creates new form admin
      */
-    public admintransaksi() {
+    public adminpengiriman() {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);   //melakukan layar full
         this.setUndecorated(true);
         initComponents();
         loadTable();
     }
     private void loadTable() {
+        
         try {
             // Hubungkan ke database
             Koneksi db = new Koneksi();
             Connection con = db.connect();
 
             // Query untuk mengambil data dari tabel users
-            String sql = "SELECT * FROM orders";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
-            // Buat model untuk JTable
-            DefaultTableModel model = new DefaultTableModel();
+            String sql = "SELECT o.id_order As id_order, p.nama AS nama_produk, o.quantity AS jumlah, o.order_date AS tanggal_pesanan, u.alamat AS alamat, u.email AS email, u.nomor telepon AS nomor_telepon o.status AS status_pesanan "
+                    + "FROM orders o "
+                    + "JOIN users u ON o.id_user = u.id_user "
+                    + "JOIN products p ON o.id_product = p.id_product "
+                    + "WHERE o.id_user = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            
+            //buat model untuk table
+            DefaultTableModel model = (DefaultTableModel) tabelpengiriman.getModel();
+            model.setRowCount(0); // Kosongkan tabel sebelum mengisi ulang data
             model.addColumn("ID Order");
-            model.addColumn("ID user");
-            model.addColumn("Order Date");
-            model.addColumn("Total");
-            model.addColumn("Payment Status");
-            model.addColumn("Order Status");
-            model.addColumn("Quantity");
-            model.addColumn("Payment Method");
-            model.addColumn("ID Produk");
+            model.addColumn("nama Produk");
+            model.addColumn("Jumlah");
+            model.addColumn("Tanggal Pesanan");
+            model.addColumn("Alamat");
+            model.addColumn("Email");
+            model.addColumn("Nomor Telepon");
+            model.addColumn("Status Pesanan");
 
             // Loop hasil query dan tambahkan ke model
+            ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getString("id_order"),
-                    rs.getString("id_user"),
-                    rs.getString("order_date"),
-                    rs.getString("payment_status"),
-                    rs.getString("status"),
-                    rs.getString("quantity"),
-                    rs.getString("metode_bayar"),
-                    rs.getString("id_produk")
-                });
-            }
+                // Ambil data dari setiap baris hasil query
+                String idorder = rs.getString("id_order");
+                String namaproduk = rs.getString("nama_produk");
+                int jumlah = rs.getInt("jumlah");
+                String tanggal = rs.getString("tanggal_pesanan");
+                String alamat = rs.getString("alamat");
+                String email = rs.getString("email");
+                String telepon = rs.getString("nomor_telepon");
+                String statusPesanan = rs.getString("status_pesanan");
 
-            // Set model ke JTable
-            tabeltransaksi.setModel(model);
+                // Tambahkan data ke tabel di GUI
+                model.addRow(new Object[]{idorder, namaproduk, jumlah, tanggal, alamat, email, telepon, statusPesanan});
+            }
+            
+            tabelpengiriman.setModel(model);
 
             // Tutup koneksi
             con.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Gagal menampilkan data: " + ex.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error saat memuat riwayat transaksi: " + e.getMessage());
         }
 }
     
@@ -97,9 +103,10 @@ public class admintransaksi extends javax.swing.JFrame {
         rSButtonIconD2 = new rojerusan.RSButtonIconD();
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
         rSButtonIconD3 = new rojerusan.RSButtonIconD();
+        btnedituser = new rojerusan.RSButtonIconD();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabeltransaksi = new javax.swing.JTable();
+        tabelpengiriman = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -151,39 +158,50 @@ public class admintransaksi extends javax.swing.JFrame {
         kGradientPanel2.add(rSButtonIconD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 150, -1));
 
         rSButtonIconD1.setBackground(new java.awt.Color(255, 153, 153));
-        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/10758945_notes_icon (1).png"))); // NOI18N
-        rSButtonIconD1.setText("Transaksi");
+        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/1291768_delivery_fast_quick_truck_logistics_icon.png"))); // NOI18N
+        rSButtonIconD1.setText("Pengiriman");
         rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonIconD1ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(rSButtonIconD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
+        kGradientPanel2.add(rSButtonIconD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 40));
 
         rSButtonIconD3.setBackground(new java.awt.Color(255, 153, 153));
-        rSButtonIconD3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/1291768_delivery_fast_quick_truck_logistics_icon.png"))); // NOI18N
-        rSButtonIconD3.setText("Pengiriman");
+        rSButtonIconD3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/10758945_notes_icon (1).png"))); // NOI18N
+        rSButtonIconD3.setText("Transaksi");
         rSButtonIconD3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonIconD3ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(rSButtonIconD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 40));
+        kGradientPanel2.add(rSButtonIconD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
+
+        btnedituser.setBackground(new java.awt.Color(255, 153, 153));
+        btnedituser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-edit-25.png"))); // NOI18N
+        btnedituser.setText("Edit");
+        btnedituser.setColorHover(new java.awt.Color(255, 204, 204));
+        btnedituser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnedituserActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(btnedituser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 150, 40));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
-        tabeltransaksi.setModel(new javax.swing.table.DefaultTableModel(
+        tabelpengiriman.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(tabeltransaksi);
+        jScrollPane1.setViewportView(tabelpengiriman);
 
         mainpanel.add(jScrollPane1, "card2");
 
@@ -232,17 +250,62 @@ public class admintransaksi extends javax.swing.JFrame {
 
     private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
         // TODO add your handling code here:
-        admintransaksi p = new admintransaksi();
+        adminpengiriman p = new adminpengiriman();
         p.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_rSButtonIconD1ActionPerformed
 
     private void rSButtonIconD3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD3ActionPerformed
         // TODO add your handling code here:
-        adminpengiriman p = new adminpengiriman();
+        admintransaksi p = new admintransaksi();
         p.setVisible(true);
-        this.dispose();
+        this.dispose(); 
     }//GEN-LAST:event_rSButtonIconD3ActionPerformed
+
+    private void btnedituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnedituserActionPerformed
+        try {
+            // Pastikan ada baris yang dipilih
+            int row = tabelpengiriman.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Pilih data yang akan diedit!");
+                return;
+            }
+
+            // Ambil data dari tabel
+            String idorder = tabelpengiriman.getValueAt(row, 0).toString();
+            String currentstatus = tabelpengiriman.getValueAt(row, 7).toString();
+
+            String newRole = JOptionPane.showInputDialog(this, "Edit Role (pending/shipped/terkirim):", currentstatus);
+            if (newRole == null || (!newRole.equalsIgnoreCase("pending") && !newRole.equalsIgnoreCase("shipped") && !newRole.equalsIgnoreCase("terkirim"))) {
+                return;
+            }
+
+            // Hubungkan ke database
+            Koneksi db = new Koneksi();
+            Connection conn = db.connect();
+
+            // Query untuk mengupdate data
+            String sql = "UPDATE users SET status = ? WHERE id_order = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Isi parameter query
+            stmt.setString(1, currentstatus);
+            stmt.setString(6, idorder);
+
+            // Eksekusi query
+            stmt.executeUpdate();
+
+            // Tampilkan pesan sukses
+            JOptionPane.showMessageDialog(this, "Data berhasil diubah!");
+
+            // Refresh tabel
+            loadTable();
+
+            conn.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnedituserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,27 +324,30 @@ public class admintransaksi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminpengiriman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminpengiriman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminpengiriman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(admintransaksi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminpengiriman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new admintransaksi().setVisible(true);
+                new adminpengiriman().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSButtonIconD btndataadmin;
+    private rojerusan.RSButtonIconD btnedituser;
     private javax.swing.JLabel exit15;
     private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
@@ -292,6 +358,6 @@ public class admintransaksi extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
     private rojerusan.RSButtonIconD rSButtonIconD3;
-    private javax.swing.JTable tabeltransaksi;
+    private javax.swing.JTable tabelpengiriman;
     // End of variables declaration//GEN-END:variables
 }

@@ -95,6 +95,8 @@ public class admindatauser extends javax.swing.JFrame {
         btnedituser = new rojerusan.RSButtonIconD();
         btnhapustuser = new rojerusan.RSButtonIconD();
         btntambahtuser = new rojerusan.RSButtonIconD();
+        rSButtonIconD1 = new rojerusan.RSButtonIconD();
+        rSButtonIconD3 = new rojerusan.RSButtonIconD();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeluser = new javax.swing.JTable();
@@ -129,6 +131,7 @@ public class admindatauser extends javax.swing.JFrame {
         kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btndataadmin.setBackground(new java.awt.Color(255, 148, 148));
+        btndataadmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/icons8-admin-25.png"))); // NOI18N
         btndataadmin.setText("Data User");
         btndataadmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +141,7 @@ public class admindatauser extends javax.swing.JFrame {
         kGradientPanel2.add(btndataadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
         rSButtonIconD2.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/9044816_product_icon.png"))); // NOI18N
         rSButtonIconD2.setText("Data Produk");
         rSButtonIconD2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +182,26 @@ public class admindatauser extends javax.swing.JFrame {
             }
         });
         kGradientPanel2.add(btntambahtuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 150, -1));
+
+        rSButtonIconD1.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/10758945_notes_icon (1).png"))); // NOI18N
+        rSButtonIconD1.setText("Transaksi");
+        rSButtonIconD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD1ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 150, 40));
+
+        rSButtonIconD3.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/1291768_delivery_fast_quick_truck_logistics_icon.png"))); // NOI18N
+        rSButtonIconD3.setText("Pengiriman");
+        rSButtonIconD3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD3ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 40));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
@@ -436,6 +460,20 @@ public class admindatauser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btntambahtuserActionPerformed
 
+    private void rSButtonIconD3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD3ActionPerformed
+        // TODO add your handling code here:
+        adminpengiriman p = new adminpengiriman();
+        p.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_rSButtonIconD3ActionPerformed
+
+    private void rSButtonIconD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD1ActionPerformed
+        // TODO add your handling code here:
+        admintransaksi p = new admintransaksi();
+        p.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_rSButtonIconD1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -484,7 +522,9 @@ public class admindatauser extends javax.swing.JFrame {
     private javax.swing.JPanel mainpanel;
     private efectos.MaterialColor materialColor1;
     private javax.swing.JPanel pnback;
+    private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
+    private rojerusan.RSButtonIconD rSButtonIconD3;
     private javax.swing.JTable tabeluser;
     // End of variables declaration//GEN-END:variables
 }
