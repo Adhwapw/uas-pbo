@@ -84,6 +84,67 @@ public class adminpengiriman extends javax.swing.JFrame {
         }
 }
     
+    
+    private void searchTable(String keyword) {
+    try {
+        // Hubungkan ke database
+        Koneksi db = new Koneksi();
+        Connection con = db.connect();
+
+        // Query untuk mencari data berdasarkan keyword pada id_order, nama_produk, tanggal_pesanan, alamat, email, nomor_telepon, status_pesanan
+        String sql = "SELECT o.id_order, p.nama AS nama_produk, o.quantity AS jumlah, o.order_date AS tanggal_pesanan, "
+                + "u.alamat, u.email, u.nomor_telepon, o.status AS status_pesanan "
+                + "FROM orders o "
+                + "JOIN users u ON o.id_user = u.id_user "
+                + "JOIN products p ON o.id_product = p.id_product "
+                + "WHERE o.id_order LIKE ? OR p.nama LIKE ? OR o.order_date LIKE ? OR u.alamat LIKE ? "
+                + "OR u.email LIKE ? OR u.nomor_telepon LIKE ? OR o.status LIKE ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        // Set parameter query dengan keyword pencarian
+        stmt.setString(1, "%" + keyword + "%");
+        stmt.setString(2, "%" + keyword + "%");
+        stmt.setString(3, "%" + keyword + "%");
+        stmt.setString(4, "%" + keyword + "%");
+        stmt.setString(5, "%" + keyword + "%");
+        stmt.setString(6, "%" + keyword + "%");
+        stmt.setString(7, "%" + keyword + "%");
+
+        ResultSet rs = stmt.executeQuery();
+
+        // Dapatkan model tabel
+        DefaultTableModel model = (DefaultTableModel) tabelpengiriman.getModel();
+
+        // Kosongkan tabel sebelum mengisi ulang data
+        model.setRowCount(0);
+
+        // Loop hasil query dan tambahkan ke model
+        while (rs.next()) {
+            // Ambil data dari setiap baris hasil query
+            String idorder = rs.getString("id_order");
+            String namaproduk = rs.getString("nama_produk");
+            int jumlah = rs.getInt("jumlah");
+            String tanggal = rs.getString("tanggal_pesanan");
+            String alamat = rs.getString("alamat");
+            String email = rs.getString("email");
+            String telepon = rs.getString("nomor_telepon");
+            String statusPesanan = rs.getString("status_pesanan");
+
+            // Tambahkan data ke tabel di GUI
+            model.addRow(new Object[]{idorder, namaproduk, jumlah, tanggal, alamat, email, telepon, statusPesanan});
+        }
+
+        // Set model ke JTable
+        tabelpengiriman.setModel(model);
+
+        // Tutup koneksi
+        con.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Gagal mencari data: " + ex.getMessage());
+    }
+}
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,6 +165,8 @@ public class adminpengiriman extends javax.swing.JFrame {
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
         rSButtonIconD3 = new rojerusan.RSButtonIconD();
         btnedituser = new rojerusan.RSButtonIconD();
+        search = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelpengiriman = new javax.swing.JTable();
@@ -186,7 +249,24 @@ public class adminpengiriman extends javax.swing.JFrame {
                 btnedituserActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(btnedituser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 150, 40));
+        kGradientPanel2.add(btnedituser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 150, 40));
+
+        search.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchKeyReleased(evt);
+            }
+        });
+        kGradientPanel2.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 350, 160, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Cari");
+        kGradientPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
@@ -307,6 +387,15 @@ public class adminpengiriman extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnedituserActionPerformed
 
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
+        String keyword = search.getText();
+        searchTable(keyword);
+    }//GEN-LAST:event_searchKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +438,7 @@ public class adminpengiriman extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD btndataadmin;
     private rojerusan.RSButtonIconD btnedituser;
     private javax.swing.JLabel exit15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KGradientPanel kGradientPanel2;
@@ -358,6 +448,7 @@ public class adminpengiriman extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
     private rojerusan.RSButtonIconD rSButtonIconD3;
+    private javax.swing.JTextField search;
     private javax.swing.JTable tabelpengiriman;
     // End of variables declaration//GEN-END:variables
 }

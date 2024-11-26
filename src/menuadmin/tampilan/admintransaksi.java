@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import uas.Koneksi;
+import uas.PrintTable;
 
 /**
  *
@@ -97,6 +98,7 @@ public class admintransaksi extends javax.swing.JFrame {
         rSButtonIconD2 = new rojerusan.RSButtonIconD();
         rSButtonIconD1 = new rojerusan.RSButtonIconD();
         rSButtonIconD3 = new rojerusan.RSButtonIconD();
+        rSButtonIconD4 = new rojerusan.RSButtonIconD();
         mainpanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabeltransaksi = new javax.swing.JTable();
@@ -169,6 +171,16 @@ public class admintransaksi extends javax.swing.JFrame {
             }
         });
         kGradientPanel2.add(rSButtonIconD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 150, 40));
+
+        rSButtonIconD4.setBackground(new java.awt.Color(255, 153, 153));
+        rSButtonIconD4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menuadmin/gambar/2931177_output_print_printer_icon.png"))); // NOI18N
+        rSButtonIconD4.setText("Cetak");
+        rSButtonIconD4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonIconD4ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(rSButtonIconD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 40));
 
         mainpanel.setLayout(new java.awt.CardLayout());
 
@@ -244,6 +256,13 @@ public class admintransaksi extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_rSButtonIconD3ActionPerformed
 
+    private void rSButtonIconD4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonIconD4ActionPerformed
+        // TODO add your handling code here:
+        PrintTable printer = new PrintTable();
+        printer.printToPDF(tabeltransaksi); // tabeltransaksi adalah JTable Anda
+
+    }//GEN-LAST:event_rSButtonIconD4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,6 +311,7 @@ public class admintransaksi extends javax.swing.JFrame {
     private rojerusan.RSButtonIconD rSButtonIconD1;
     private rojerusan.RSButtonIconD rSButtonIconD2;
     private rojerusan.RSButtonIconD rSButtonIconD3;
+    private rojerusan.RSButtonIconD rSButtonIconD4;
     private javax.swing.JTable tabeltransaksi;
     // End of variables declaration//GEN-END:variables
 }
